@@ -157,43 +157,6 @@ namespace QuestPatcher.Services
                     ExitApplication();
                 }
             }
-            catch (GameIsCrackedException)
-            {
-                DialogBuilder builder1 = new()
-                {
-                    Title = "非原版BeatSaber！",
-                    Text = "检测到已安装的BeatSaber版本可能存在异常，\n" +
-                           "你安装的游戏有可能是盗版，QuestPatcher不兼容盗版，请支持正版！",
-                    HideCancelButton = true
-                };
-
-                var button1 = new ButtonInfo
-                {
-                    Text = "为何不兼容盗版？",
-                    CloseDialogue = false,
-                    ReturnValue = false,
-                    OnClick = () => Util.OpenWebpage("https://bs.wgzeyu.com/oq-guide-qp/#sbwc8866")
-                };
-
-                var button2 = new ButtonInfo
-                {
-                    Text = "如何购买正版？",
-                    CloseDialogue = false,
-                    ReturnValue = false,
-                    OnClick = () => Util.OpenWebpage("https://bs.wgzeyu.com/buy/#bs_quest")
-                };
-
-                var button3 = new ButtonInfo
-                {
-                    Text = "卸载当前版本",
-                    CloseDialogue = true,
-                    ReturnValue = true
-                };
-
-                builder1.WithButtons(button1, button2, button3);
-                await builder1.OpenDialogue(_mainWindow);
-                await InstallManager.UninstallApp();
-            }
             catch (Exception ex)
             {
                 var builder = new DialogBuilder
